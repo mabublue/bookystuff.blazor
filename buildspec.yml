@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - cd bookystuff.Server
+      - dotnet restore
+      - dotnet build
+      - cd ..
+artifacts:
+  files:
+    - bookystuff.Server/bin/Debug/netcoreapp2.1/*
