@@ -16,7 +16,7 @@ phases:
       - echo "${TerraformSha256}  terraform.zip" | sha256sum -c --quiet
       - unzip terraform.zip
       - mv terraform /usr/bin
-      - cd /
+      - cd ..
     finally:
       - echo End of install phase 
   pre_build:
@@ -33,7 +33,7 @@ phases:
       - echo Apply Infrastructure from Terraform ...
       - echo ... apply ...
       - terraform apply -auto-approve
-      - cd /
+      - cd ..
     finally:
       - echo End of pre_build phase
   build:
