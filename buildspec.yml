@@ -16,7 +16,7 @@ phases:
       - echo "${TerraformSha256}  terraform.zip" | sha256sum -c --quiet
       - unzip terraform.zip
       - mv terraform /usr/bin
-      - cd /codebuild/output/src836580256/src
+      - cd ${CODEBUILD_SRC_DIR}
     finally:
       - echo End of install phase 
   pre_build:
