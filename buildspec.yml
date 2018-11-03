@@ -1,14 +1,19 @@
 version: 0.2
 
+env:
+  variables:
+    TerraformSha256: "43543a0e56e31b0952ea3623521917e060f2718ab06fe2b2d506cfaa14d54527"
+    TerraformSVersion: "0.11.10"
+
 phases:
   install:
     commands:
       - echo Entered the install phase ...
       - echo Install Terraform ...
       - cd /tmp 
-      - curl -o terraform.zip https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/${TerraformSVersion}/terraform_${TerraformSVersion}_linux_amd64.zip
       - sha256sum --version
-      - echo ${TerraformSha256}  terraform.zip | sha256sum -c --quiet
+      - echo "${TerraformSha256}  terraform.zip" | sha256sum -c --quiet
       - unzip terraform.zip
       - mv terraform /usr/bin
       - cd /
