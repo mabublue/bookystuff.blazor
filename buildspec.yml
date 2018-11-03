@@ -1,12 +1,38 @@
 version: 0.2
 
 phases:
+  install:
+     commands:
+      - echo Entered the install phase ...
+      - Install Terraform ...
+      - choco install terraform
+    finally:
+      - echo End of install phase 
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase ...
+      - echo Apply Infrastructure from Terraform ...
+      - cd bookystuff.Terraform
+      - echo ... init ...
+      - terraform init
+      - echo Apply Infrastructure from Terraform ...
+      - echo ... plan ...
+      - terraform plan
+      - echo Apply Infrastructure from Terraform ...
+      - echo ... apply ...
+      - terraform apply -auto-approve
+      - cd ..
+    finally:
+      - echo End of pre_build phase
   build:
     commands:
+      - echo Entered the build phase...
       - cd bookystuff.Server
-      - dotnet restore
-      - dotnet build
-      - cd ..
-artifacts:
-  files:
-    - bookystuff.Server/bin/Debug/netcoreapp2.1/*
+      - echo ... build ...
+      - docker build -t 322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff:bookystuff-blazor bookystuff.Server
+      - echo ... login ...
+      - $(aws ecr get-login --no-include-email --region $aws_region)
+      - echo ... push ...
+      - docker push 322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff:bookystuff-blazor
+    finally:
+      - echo End of build phase
