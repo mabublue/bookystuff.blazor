@@ -10,13 +10,17 @@ phases:
     commands:
       - echo Entered the install phase ...
       - echo Install Terraform ...
+      - ls
       - cd /tmp 
+      - ls
       - curl -o terraform.zip https://releases.hashicorp.com/terraform/${TerraformSVersion}/terraform_${TerraformSVersion}_linux_amd64.zip
       - sha256sum --version
       - echo "${TerraformSha256}  terraform.zip" | sha256sum -c --quiet
       - unzip terraform.zip
       - mv terraform /usr/bin
+      - ls
       - cd ..
+      - ls
     finally:
       - echo End of install phase 
   pre_build:
@@ -25,6 +29,7 @@ phases:
       - echo Apply Infrastructure from Terraform ...
       - ls
       - cd /bookystuff.Terraform
+      - ls
       - echo ... init ...
       - terraform init
       - echo Apply Infrastructure from Terraform ...
@@ -33,7 +38,9 @@ phases:
       - echo Apply Infrastructure from Terraform ...
       - echo ... apply ...
       - terraform apply -auto-approve
+      - ls
       - cd ..
+      - ls
     finally:
       - echo End of pre_build phase
   build:
