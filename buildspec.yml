@@ -6,8 +6,7 @@ phases:
       - echo Entered the install phase ...
       - echo Install Terraform ...
       - cd /tmp 
-      - curl -o terraform.zip https://releases.hashicorp.com/terraform/${TerraformVersion}/terraform_${TerraformVersion}_linux_amd64.zip
-      - ${TerraformSha256} terraform.zip | sha256sum -c --quiet
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/${TerraformVersion}/terraform_${TerraformVersion}_linux_amd64.zip && echo ${TerraformSha256} terraform.zip | sha256sum -c --quiet
       - unzip terraform.zip
       - mv terraform /usr/bin
       - cd /
