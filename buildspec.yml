@@ -4,6 +4,7 @@ env:
   variables:
     TerraformSha256: "43543a0e56e31b0952ea3623521917e060f2718ab06fe2b2d506cfaa14d54527"
     TerraformSVersion: "0.11.10"
+    AWS_Region: "ap-southeast-2"
 
 phases:
   install:
@@ -42,7 +43,7 @@ phases:
       - ls
       - docker build -t 322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff:bookystuff-blazor . --build-arg rootpath=${CODEBUILD_SRC_DIR}
       - echo ... login ...
-      - $(aws ecr get-login --no-include-email --region $aws_region)
+      - $(aws ecr get-login --no-include-email --region $AWS_Region)
       - echo ... push ...
       - docker push 322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff:bookystuff-blazor
     finally:
