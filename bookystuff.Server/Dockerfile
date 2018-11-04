@@ -4,6 +4,7 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
+RUN ls
 COPY bookystuff.Server/bookystuff.Server.csproj, bookystuff.Server/
 COPY bookystuff.Client/bookystuff.Client.csproj, bookystuff.Client/
 COPY bookystuff.Shared/bookystuff.Shared.csproj, bookystuff.Shared/
