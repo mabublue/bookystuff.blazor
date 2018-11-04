@@ -9,6 +9,7 @@ env:
 phases:
   install:
     commands:
+      - REPOSITORY_URI=322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff
       - echo Entered the install phase ...
       - echo Install Terraform ...
       - cd /tmp 
@@ -41,10 +42,15 @@ phases:
       - echo Entered the build phase...
       - echo ... build ...
       - ls
-      - docker build -t 322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff:bookystuff-blazor -t 322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff:latest . --build-arg rootpath=${CODEBUILD_SRC_DIR}
+      - docker build -t ${REPOSITORY_URI}:bookystuff-blazor -t ${REPOSITORY_URI}:latest . --build-arg rootpath=${CODEBUILD_SRC_DIR}
       - echo ... login ...
       - $(aws ecr get-login --no-include-email --region $AWS_Region)
       - echo ... push ...
-      - docker push 322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff:bookystuff-blazor
+      - docker push ${REPOSITORY_URI}:bookystuff-blazor
+      - docker push ${REPOSITORY_URI}:latest
+      - echo Writing image definitions file...
+      - printf '[{"name":"bookystuff","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
     finally:
       - echo End of build phase
+artifacts:
+    files: imagedefinitions.json

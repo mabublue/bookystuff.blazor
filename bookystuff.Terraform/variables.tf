@@ -10,7 +10,7 @@ variable "az_count" {
 
 variable "app_image" {
   description = "Docker image to run in the ECS cluster"
-  default     = "bookystuff/bookystuff-blazor:latest"
+  default     = "322767926738.dkr.ecr.ap-southeast-2.amazonaws.com/bookystuff:latest"
 }
 
 variable "app_port" {
