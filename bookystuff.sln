@@ -17,7 +17,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Terraform", "Terraform", "{97C9A005-F483-48D0-BB27-D96F1543DCE1}"
 	ProjectSection(SolutionItems) = preProject
 		main.tf = main.tf
+		bookystuff.Terraform\outputs.tf = bookystuff.Terraform\outputs.tf
 		remote.tf = remote.tf
+		bookystuff.Terraform\variables.tf = bookystuff.Terraform\variables.tf
 	EndProjectSection
 EndProject
 Global
