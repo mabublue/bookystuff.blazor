@@ -199,7 +199,7 @@ resource "aws_ecs_cluster" "main" {
 }
 
 data "aws_iam_role" "ecs_task_execution_role" {
-  arn = "arn:aws:iam::322767926738:role/ecsTaskExecutionRole"
+  name = "ecsTaskExecutionRole"
 }
 
 resource "aws_ecs_task_definition" "app" {
