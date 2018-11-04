@@ -4,9 +4,9 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY "bookystuff.Server/bookystuff.Server.csproj", "bookystuff.Server/"
-COPY "bookystuff.Client/bookystuff.Client.csproj", "bookystuff.Client/"
-COPY "bookystuff.Shared/bookystuff.Shared.csproj", "bookystuff.Shared/"
+COPY "bookystuff.Server/bookystuff.Server.csproj" "bookystuff.Server/"
+COPY "bookystuff.Client/bookystuff.Client.csproj" "bookystuff.Client/"
+COPY "bookystuff.Shared/bookystuff.Shared.csproj" "bookystuff.Shared/"
 RUN dotnet restore "bookystuff.Server/bookystuff.Server.csproj"
 COPY . .
 WORKDIR /src/bookystuff.Server
