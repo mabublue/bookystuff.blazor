@@ -3,14 +3,16 @@ WORKDIR /app
 EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk AS build
+RUN pwd
 WORKDIR /src
-RUN ls
+RUN pwd
 COPY bookystuff.Server/bookystuff.Server.csproj, bookystuff.Server/
 COPY bookystuff.Client/bookystuff.Client.csproj, bookystuff.Client/
 COPY bookystuff.Shared/bookystuff.Shared.csproj, bookystuff.Shared/
 RUN dotnet restore "bookystuff.Server/bookystuff.Server.csproj"
 COPY . .
 WORKDIR /src/bookystuff.Server
+RUN pwd
 RUN dotnet build "bookystuff.Server.csproj" -c Release -o /app
 
 FROM build AS publish
