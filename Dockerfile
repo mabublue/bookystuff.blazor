@@ -3,9 +3,10 @@ WORKDIR /app
 EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk AS build
+ARG rootpath
 RUN pwd
 RUN ls -l
-WORKDIR /src
+WORKDIR ${rootpath}
 RUN pwd
 RUN ls -l
 COPY bookystuff.Server/bookystuff.Server.csproj, bookystuff.Server/
@@ -13,7 +14,7 @@ COPY bookystuff.Client/bookystuff.Client.csproj, bookystuff.Client/
 COPY bookystuff.Shared/bookystuff.Shared.csproj, bookystuff.Shared/
 RUN dotnet restore "bookystuff.Server/bookystuff.Server.csproj"
 COPY . .
-WORKDIR /src/bookystuff.Server
+WORKDIR ${rootpath}/bookystuff.Server
 RUN pwd
 RUN dotnet build "bookystuff.Server.csproj" -c Release -o /app
 
