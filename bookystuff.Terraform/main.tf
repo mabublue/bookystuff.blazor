@@ -117,14 +117,14 @@ resource "aws_security_group" "lb" {
   vpc_id      = "${aws_vpc.main.id}"
 
   ingress {
-    protocol    = "tcp"
+    protocol    = "http"
     from_port   = 80
     to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    protocol    = "tcp"
+    protocol    = "https"
     from_port   = 443
     to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
@@ -181,14 +181,14 @@ resource "aws_alb" "main" {
 
 resource "aws_alb_target_group" "bookystuff-blazor" {
   name        = "bookystuff-ecs-alb"
-  port        = 80
+  port        = 3000
   protocol    = "HTTP"
   vpc_id      = "${aws_vpc.main.id}"
   target_type = "ip"
 }
 
 # Redirect all traffic from the ALB to the target group
-resource "aws_alb_listener" "front_end" {
+resource "aws_alb_listener" "front_end_80" {
   load_balancer_arn = "${aws_alb.main.id}"
   port              = "80"
   protocol          = "HTTP"
@@ -199,10 +199,12 @@ resource "aws_alb_listener" "front_end" {
   }
 }
 
-resource "aws_alb_listener" "front_end" {
+resource "aws_alb_listener" "front_end_443" {
   load_balancer_arn = "${aws_alb.main.id}"
   port              = "443"
   protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:ap-southeast-2:322767926738:certificate/cac8b674-6dce-4cd8-8771-4647826408bb"
 
   default_action {
     target_group_arn = "${aws_alb_target_group.bookystuff-blazor.id}"
@@ -267,6 +269,7 @@ resource "aws_ecs_service" "main" {
   }
 
   depends_on = [
-    "aws_alb_listener.front_end",
+    "aws_alb_listener.front_end_80",
+    "aws_alb_listener.front_end_443"
   ]
 }
