@@ -8,6 +8,7 @@ resource "aws_ecr_repository" "repository" {
   name = "bookystuff"
 }
 
+
 ### Network
 
 # Fetch AZs in the current region
@@ -195,6 +196,10 @@ resource "aws_alb_listener" "front_end" {
 
 resource "aws_ecs_cluster" "main" {
   name = "bookystuff-ecs-cluster"
+}
+
+data "aws_iam_role" "ecs_task_execution_role" {
+  arn = "arn:aws:iam::322767926738:role/ecsTaskExecutionRole"
 }
 
 resource "aws_ecs_task_definition" "app" {
