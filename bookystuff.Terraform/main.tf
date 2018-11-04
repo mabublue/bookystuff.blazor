@@ -179,7 +179,7 @@ resource "aws_alb" "main" {
   }
 }
 
-resource "aws_alb_target_group" "app" {
+resource "aws_alb_target_group" "bookystuff-blazor" {
   name        = "bookystuff-ecs-alb"
   port        = 80
   protocol    = "HTTP"
@@ -194,7 +194,7 @@ resource "aws_alb_listener" "front_end" {
   protocol          = "HTTP"
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.app.id}"
+    target_group_arn = "${aws_alb_target_group.bookystuff-blazor.id}"
     type             = "forward"
   }
 }
@@ -205,7 +205,7 @@ resource "aws_alb_listener" "front_end" {
   protocol          = "HTTPS"
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.app.id}"
+    target_group_arn = "${aws_alb_target_group.bookystuff-blazor.id}"
     type             = "forward"
   }
 }
@@ -251,7 +251,7 @@ DEFINITION
 resource "aws_ecs_service" "main" {
   name            = "bookystuff-ecs-service"
   cluster         = "${aws_ecs_cluster.main.id}"
-  task_definition = "${aws_ecs_task_definition.app.arn}"
+  task_definition = "${aws_ecs_task_definition.bookystuff-blazor.arn}"
   desired_count   = "${var.app_count}"
   launch_type     = "FARGATE"
 
@@ -261,8 +261,8 @@ resource "aws_ecs_service" "main" {
   }
 
   load_balancer {
-    target_group_arn = "${aws_alb_target_group.app.id}"
-    container_name   = "app"
+    target_group_arn = "${aws_alb_target_group.bookystuff-blazor.id}"
+    container_name   = "bookystuff-blazor"
     container_port   = "${var.app_port}"
   }
 
