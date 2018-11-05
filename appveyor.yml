@@ -7,9 +7,9 @@ pull_requests:
 
 environment:
   AWS_ACCESS_KEY_ID:
-    secure: V3KPdkkR+rRBPZJl/f/9MT5K9frQbzCzUAFCf/eBP0c=
+    secure: fg4Mc6ip4sAUdkjMyVVSntkFNHSRXSXdvnrbHslNLyo=
   AWS_SECRET_ACCESS_KEY:
-    secure: 55f2uQ/T0Us5NZ2aPpzeCyowt/tAynqsRmknW6cjvHUpqKI7RA4X9fQf4jEYaDeJ
+    secure: SR3N2pr6Thn7vDtAIeTRmeu+An8vE4+pg92B9BpWcK7ijCzcz5FqKAYbDxMQu3Fy
 
 services:
   - docker
