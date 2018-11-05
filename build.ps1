@@ -5,7 +5,7 @@ function PackageIntegration
     param([string]$Command)
 
     Write-Output "Building Integration Image"
-    docker build -t ${REPOSITORY_URI}:bookystuff-blazor -t ${REPOSITORY_URI}:latest . .\bookystuff.Server
+    docker build -t ${REPOSITORY_URI}:bookystuff-blazor -t ${REPOSITORY_URI}:latest .
     Write-Output "Finished Building Integration Image"
     if ($command -eq "apply")
     {
