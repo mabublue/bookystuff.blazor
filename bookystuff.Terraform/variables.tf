@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "az_count" {
   description = "Number of AZs to cover in a given AWS region"
-  default     = "1"
+  default     = "2"
 }
 
 variable "app_image" {
