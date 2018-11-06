@@ -17,7 +17,6 @@ namespace bookystuff.Server
                     .AddCommandLine(args)
                     .Build())
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:3000/")
                 .Build();
     }
 }
