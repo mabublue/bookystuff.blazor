@@ -181,7 +181,7 @@ resource "aws_alb" "main" {
 
 resource "aws_alb_target_group" "bookystuff-blazor" {
   name        = "bookystuff-ecs-alb"
-  port        = 3000
+  port        = "${var.app_port}"
   protocol    = "HTTP"
   vpc_id      = "${aws_vpc.main.id}"
   target_type = "ip"
