@@ -251,11 +251,12 @@ DEFINITION
 }
 
 resource "aws_ecs_service" "main" {
-  name            = "bookystuff-ecs-service"
-  cluster         = "${aws_ecs_cluster.main.id}"
-  task_definition = "${aws_ecs_task_definition.bookystuff-blazor.arn}"
-  desired_count   = "${var.app_count}"
-  launch_type     = "FARGATE"
+  name                              = "bookystuff-ecs-service"
+  cluster                           = "${aws_ecs_cluster.main.id}"
+  task_definition                   = "${aws_ecs_task_definition.bookystuff-blazor.arn}"
+  desired_count                     = "${var.app_count}"
+  launch_type                       = "FARGATE"
+  health_check_grace_period_seconds = "30"
 
   network_configuration {
     security_groups = ["${aws_security_group.ecs_tasks.id}"]
